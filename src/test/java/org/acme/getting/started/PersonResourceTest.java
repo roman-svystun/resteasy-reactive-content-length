@@ -13,13 +13,23 @@ public class PersonResourceTest {
 
     // Failing test
     @Test
-    public void testPersonEndpoint() {
+    public void testJsonEndpoint256Bytes() {
         given().when()
                 .get("/person")
                 .then()
                 .statusCode(200)
                 .header(CONTENT_LENGTH, is(matchesPattern("^\\d+$")))
-                .body(is("{\"name\":\"256 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute\"}"));
+                .body(is("{\"name\":\"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz\"}"));
+    }
+
+    @Test
+    public void testPlainText256Bytes() {
+        given().when()
+                .get("/text")
+                .then()
+                .statusCode(200)
+                .header(CONTENT_LENGTH, is(matchesPattern("^\\d+$")))
+                .body(is("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
     }
 
 }
